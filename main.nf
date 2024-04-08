@@ -104,12 +104,12 @@ if(mate=="pair"){
 
 process vdjbase_input {
 
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /chain$/) "reads/$filename"}
+publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /${chain}$/) "reads/$filename"}
 input:
  set val(name),file(reads) from g_16_airr_fasta_file0_g_10
 
 output:
- file chain  into g_10_germlineDb00
+ file "${chain}"  into g_10_germlineDb00
 
 script:
 chain = params.vdjbase_input.chain
