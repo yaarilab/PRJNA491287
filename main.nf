@@ -3,9 +3,8 @@ params.outdir = 'results'
 
 //* params.nproc =  20  //* @input @description:"How many processes to use for each step. Default 1"
 params.mate="single"
-//* params.projectDir = "${projectDir}"  //* @input @description:"How many processes to use for each step. Default 1"
+evaluate(new File("${params.projectDir}/nextflow_header.config"))
 params.metadata.metadata = "${params.projectDir}/tools.json"
-
 
 
 if (!params.reads){params.reads = ""} 
