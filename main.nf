@@ -70,16 +70,9 @@ input:
 output:
  set val(name),  file("*fasta")  into g_16_airr_fasta_file0_g_10
 
-#shell example: 
-
-#!/bin/sh 
-
-
-
 script:
-	
-readArray = reads.toString().split(' ')	
 
+readArray = reads.toString().split(' ')	
 if(mate=="pair"){
 	R1 = readArray.grep(~/.*R1.*/)[0]
 	R2 = readArray.grep(~/.*R2.*/)[0]
