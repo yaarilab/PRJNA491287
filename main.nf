@@ -3,7 +3,6 @@ params.outdir = 'results'
 
 //* params.nproc =  20  //* @input @description:"How many processes to use for each step. Default 1"
 params.mate="single"
-evaluate(new File("${params.projectDir}/nextflow_header.config"))
 params.metadata.metadata = "${params.projectDir}/tools.json"
 
 
@@ -106,13 +105,10 @@ output:
 script:
 chain = params.vdjbase_input.chain
 
-
-
-'''
-#!/bin/sh 
+"""
 mkdir ${chain}
 mv ${reads} ${chain}
-'''
+"""
 
 }
 
