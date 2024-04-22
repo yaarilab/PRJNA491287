@@ -128,62 +128,6 @@ mv ${reads} ${chain}
 }
 
 
-process metadata {
-
-publishDir params.outdir, mode: 'copy', saveAs: {filename -> if (filename =~ /.*.json$/) "metadata/$filename"}
-
-output:
- file "*.json"  into g_12_jsonFile00
-
-script:
-metadata = params.metadata.metadata
-"""
-#!/usr/bin/env Rscript
-
-if (!requireNamespace("jsonlite", quietly = TRUE)) {
-  install.packages("jsonlite")
-}
-library(jsonlite)
-
-data <- read_json("${metadata}") 
-
-versions <- lapply(1:length(data), function(i){
-	
-	docker <- data[i]
-	tool <- names(data)[i]
-	
-	if(grepl("Custom", docker)){
-		ver <- "0.0"
-	}else{
-		ver <- system(paste0(tool," --version"), intern = TRUE)
-		ver <- gsub(paste0(tool,": "), "", ver)
-	}
-	ver
-	
-})
-
-names(versions) <- names(data)
-
-json_data <- list(
-  sample = list(
-    data_processing = list(
-      preprocessing = list(
-        software_versions = versions
-	   )
-	 )
-  )
-)
-
-# Convert to JSON string without enclosing scalar values in arrays
-json_string <- toJSON(json_data, pretty = TRUE, auto_unbox = TRUE)
-print(json_string)
-# Write the JSON string to a file
-writeLines(json_string, "pre_processed_metadata.json")
-"""
-
-}
-
-
 workflow.onComplete {
 println "##Pipeline execution summary##"
 println "---------------------------"
