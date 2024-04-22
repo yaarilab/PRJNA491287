@@ -4,8 +4,6 @@ params.outdir = 'results'
 //* params.nproc =  20  //* @input @description:"How many processes to use for each step. Default 1"
 params.mate="single"
 params.projectDir="${projectDir}"
-params.metadata.metadata = "${params.projectDir}/tools.json"
-
 
 if (!params.reads){params.reads = ""} 
 if (!params.mate){params.mate = ""} 
