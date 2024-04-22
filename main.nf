@@ -100,7 +100,7 @@ if(mate=="pair"){
 }else{
 
 	"""
-	 awk 'NR%4==1{printf ">%s\n", substr(\$0,2)}NR%4==2{print}' ${reads} > ${name}.fasta
+	 awk 'NR%4==1{printf ">%s%c", substr(\$0,2)}NR%4==2{print}' ${reads} > ${name}.fasta
 	"""
 }
 }
