@@ -93,14 +93,14 @@ if(mate=="pair"){
 	R2n = R2.replace('.fastq','')
 	
 	"""
-	 awk 'NR%4==1{printf ">%s\n", substr(\$0,2)}NR%4==2{print}'  ${R1n}.fastq > ${R1n}.fasta
-	 awk 'NR%4==1{printf ">%s\n", substr(\$0,2)}NR%4==2{print}'  ${R2n}.fastq > ${R2n}.fasta
+	 awk 'NR%4==1{printf ">%s\\n", substr(\$0,2)}NR%4==2{print}'  ${R1n}.fastq > ${R1n}.fasta
+	 awk 'NR%4==1{printf ">%s\\n", substr(\$0,2)}NR%4==2{print}'  ${R2n}.fastq > ${R2n}.fasta
 	"""
 	
 }else{
 
 	"""
-	 awk 'NR%4==1{printf ">%s%c", substr(\$0,2)}NR%4==2{print}' ${reads} > ${name}.fasta
+	 awk 'NR%4==1{printf ">%s\\n", substr(\$0,2)}NR%4==2{print}' ${reads} > ${name}.fasta
 	"""
 }
 }
